@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-  	render json: @user, status: 'ok'
+  	render json: {email: @user.email, name: @user.name, username: @user.username}, status: 'ok', code: 200
   end
 
   def create
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   private
   def set_user
-  	@user = Uesr.find(params[:id])
+  	@user = User.find(params[:id])
     rescue ActiveRecord::RecordNotFound
     	render json: {errors: "user not found"}, status: :not_found
   end
